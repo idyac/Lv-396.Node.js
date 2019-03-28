@@ -6,12 +6,11 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./navbar-profile.component.scss']
 })
 export class NavbarProfileComponent implements OnInit {
-  @Input() menuRight:any;
-  
-  avatar:string = "assets/img/navbar-symbol-mob.png";
-  name:string = "Name";
-  surname:string = "Surname";
-  notificationsNumber:number = 7;
+  @Input() menuRight: any;
+  avatar: string = 'assets/img/navbar-symbol-mob.png';
+  name: string = 'Name';
+  surname: string = 'Surname';
+  notificationsNumber: number = 7;
 
   constructor() { }
 
@@ -21,9 +20,9 @@ export class NavbarProfileComponent implements OnInit {
   changeCurrent(index, links) {
     event.preventDefault();
     links.forEach(item => {
-      item.isCurrent = false
-    })
-    if(index !== 0) {
+      item.isCurrent = false;
+    });
+    if (index !== 0) {
       links[index].isCurrent = true;
     }
   }
