@@ -11,19 +11,35 @@ export class NavbarProfileComponent implements OnInit {
   name: string = 'Name';
   surname: string = 'Surname';
   notificationsNumber: number = 7;
+  isHR: boolean;
 
   constructor() { }
 
   ngOnInit() {
+    this.isHR = true;
   }
 
-  changeCurrent(index, links) {
+  changeCurrent() {
     event.preventDefault();
-    links.forEach(item => {
-      item.isCurrent = false;
-    });
-    if (index !== 0) {
-      links[index].isCurrent = true;
+    // links.forEach(item => {
+    //   item.isCurrent = false;
+    // });
+    // if (index !== 0) {
+    //   links[index].isCurrent = true;
+    // }
+    let current = document.getElementsByClassName('current');
+    for(let i=0; i < current.length; i++) {
+      current[i].classList.remove('current');
     }
+  // }
+  // toggleClass(event: any, class: string) {
+  //   event.preventDefault()
+  //   const hasClass = event.target.classList.contains(class)
+  
+  //   if(hasClass) {
+  //     this.renderer.removeClass(event.target, class)
+  //   } else {
+  //     this.renderer.addClass(event.target, class)
+  //   }
   }
 }

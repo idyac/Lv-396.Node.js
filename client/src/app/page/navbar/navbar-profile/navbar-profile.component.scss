@@ -46,34 +46,36 @@ p {
 		}
   }
   .right-navbar {
-		display: none;
-		@include media-breakpoint-up(md) {
-			display: flex;
-    	height: 100%;
-			width: 65%;
-		} 
+		display: flex;
+    height: 100%;
+		width: 65%;
     &__btn {
 			display: flex;
 			flex-direction: row;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
-			width: 100%;
+      width: 100%;
+      @include media-breakpoint-up(md) {
+        justify-content: space-between;
+      }   
     }
     &__name {
-			display: flex;
-      font: normal 12px arial, sans-serif;
-      color: #ffff;
+			display: none;
       @include media-breakpoint-up(md) {
+        display: flex;
+        color: #ffff;
       	font: 14px Arial, sans-serif;
       }    
     }
     &__avatar {
       height: 25px;
       width: 25px;
-			border-radius: 50%;
+      border-radius: 50%;
+      margin-left: 10px;
 			@include media-breakpoint-up(md) {
 				height: 35px;
-				width: 35px;
+        width: 35px;
+        margin-left: auto;
       }    
     }
     &__menu {

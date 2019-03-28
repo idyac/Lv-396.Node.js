@@ -89,56 +89,6 @@ nav {
   }
 }
 
-.right-navbar {
-  display: flex;
-  padding-top: 15px; 
-  width: 70%;
-  @include media-breakpoint-up(md) {
-    display: none;
-  }
-  &__btn {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin: 0;
-  }
-  &__name {
-    font: normal 12px arial, sans-serif;
-    color: $textColor;
-  }
-  &__avatar {
-    height: 35px;
-    width: 35px;
-    border-radius: 50%;
-  }
-  &__menu {
-    margin-top: 10px!important;
-    padding: 0;
-    width: 230px;
-    border-color: $case-color;
-    border-radius: 1px;
-  }
-  &__item {
-    font: normal 14px arial, sans-serif;
-    color: $primary-color;
-    padding: 17px;  
-  }
-}
-.dropdown-menu li a:hover {
-  background: $bg-color!important;
-}
-.dropdown-menu li a{
-  position: relative;
-}
-.dropdown-menu li.current a::after {
-  position: absolute;
-  content: url('../../../assets/img/symbol_ok.svg');
-  left: 190px;
-}
-
-
 .user-info {
   width: 100%;
   height: 100%;

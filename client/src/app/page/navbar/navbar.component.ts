@@ -8,9 +8,6 @@ import { Component, OnInit, Input } from '@angular/core';
 export class NavbarComponent implements OnInit {
   @Input() menuBurger: [];
   @Input() menuRight: [];
-  name: string = 'Name';
-  surname: string = 'Surname';
-  avatar: string = 'assets/img/navbar-symbol-desk.png';
   constructor() { }
 
   ngOnInit() {
@@ -22,8 +19,6 @@ export class NavbarComponent implements OnInit {
       item.isCurrent = false;
     });
     links[index].isCurrent = true;
-    if (links[index].title === 'Log Out') {
-      links[index].isCurrent = false;
-    }
+
   }
 }
