@@ -11,6 +11,7 @@ export class DateService {
   constructor(private readonly helperService: HelperService) { }
 
   public isDateString = (dateStr: string): boolean => {
+    console.log(`string ${typeof(dateStr)}`);
     const str = `${dateStr}`;
     const time = str.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
     if (time === null) {
@@ -35,6 +36,7 @@ export class DateService {
     const yyyy = date.getFullYear()
       .toString();
     const separator = '/';
+
 
     return dd + separator + mm + separator + yyyy;
   };

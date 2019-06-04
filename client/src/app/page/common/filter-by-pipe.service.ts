@@ -57,7 +57,7 @@ export class FilterByPipeService {
 
   private readonly convertToGeneralDateFormat = (date: Date): string => {
     const dateConverted = this.convertToDateType(date);
-
+    console.log('date' + dateConverted);
     return this.dateService.convertDate(dateConverted);
   };
 

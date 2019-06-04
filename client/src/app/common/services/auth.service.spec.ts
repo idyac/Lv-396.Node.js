@@ -5,7 +5,6 @@ import { HttpTestingController, HttpClientTestingModule } from '@angular/common/
 import { api } from '../../../environments/environment';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from './auth.service';
-import { throwError } from 'rxjs';
 
 describe('AuthService', () => {
   let httpTestingController: HttpTestingController;
