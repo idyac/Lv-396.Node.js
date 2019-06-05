@@ -8,6 +8,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { Filter } from '../common/filter';
+import { FilterReturnService } from '../common/filter-return.service';
+import { appConfigProviders } from '../common/config';
 
 describe('FilterComponent', () => {
   let component: FilterComponent;
@@ -49,7 +51,10 @@ describe('FilterComponent', () => {
         FilterComponent,
         DropdownFilterComponent,
         DatepickerFilterComponent
-      ]
+      ],
+      providers: [ appConfigProviders,
+                   { provide: FilterReturnService, useValue: filters },
+]
     })
     .compileComponents();
   }));

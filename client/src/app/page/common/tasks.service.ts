@@ -83,6 +83,7 @@ export class TasksService {
   }
 
   public editTask(requestBody: TaskEditRequestBody): Observable<any> {
+
     return this.http.put<TaskEditRequestBody>(`${api}/issues`, requestBody, httpOptions);
   }
 
