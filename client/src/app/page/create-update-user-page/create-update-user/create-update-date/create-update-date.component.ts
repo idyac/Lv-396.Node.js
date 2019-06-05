@@ -40,15 +40,14 @@ export class CreateUpdateDateComponent implements OnInit, OnDestroy, AfterViewIn
 
   initDates(): any {
     return this.fb.group({
-      topic: ['', Validators.required],
-      date: [Validators.required],
+      topic: [''],
+      date: [],
     });
   }
 
   addDate(): void {
     const control = this.addDatesForm.controls.datesCount as FormArray;
     control.push(this.initDates());
-    console.log(this.addDatesForm.controls.datesCount);
   }
 
   removeDate(i: number): void {

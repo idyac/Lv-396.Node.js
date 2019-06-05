@@ -28,6 +28,6 @@ export class ItemDateComponent implements OnInit {
     }
   }
 
-  public convertDate = (date: Date): boolean =>
+  convertDate = (date: Date): boolean =>
     this.dateService.convertDate(this.todayDate) === this.dateService.convertDate(date);
 }
