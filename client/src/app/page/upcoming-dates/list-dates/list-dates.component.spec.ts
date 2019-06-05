@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListDatesComponent } from './list-dates.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ItemDateComponent } from './item-date/item-date.component';
 
 describe('ListDatesComponent', () => {
   let component: ListDatesComponent;
@@ -8,7 +10,8 @@ describe('ListDatesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListDatesComponent ]
+      declarations: [ ListDatesComponent, ItemDateComponent ],
+      imports: [ HttpClientTestingModule ]
     })
     .compileComponents();
   }));
@@ -20,6 +23,7 @@ describe('ListDatesComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component)
+      .toBeTruthy();
   });
 });

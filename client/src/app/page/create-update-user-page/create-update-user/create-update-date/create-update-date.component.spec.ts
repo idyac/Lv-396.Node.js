@@ -106,17 +106,4 @@ describe('CreateUpdateDateComponent', () => {
         .toBe('border-green');
     });
   });
-
-  describe('updateDates', () => {
-
-  });
-
-  describe('updateTopic', () => {
-
-  });
-
-  describe('loadDates', () => {
-
-  });
-
 });

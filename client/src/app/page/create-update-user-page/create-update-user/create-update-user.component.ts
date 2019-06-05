@@ -6,7 +6,7 @@ import { User } from '../../../common/models/user';
 
 import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
 import { DatesItem } from '../../common/dates-item';
-import { Subject } from 'rxjs/Rx';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-create-update-user',

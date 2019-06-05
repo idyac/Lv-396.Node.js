@@ -1,9 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
 import { CreateUpdateUserService } from '../../../common/create-update-user.service';
-import { DatesItem } from '../../../common/dates-item';
-import { DateService } from '../../../common/date.service';
-import { UserService } from '../../../../common/services/user.service';
 import { Subject } from 'rxjs';
 import { User } from '../../../../common/models/user';
 
@@ -15,19 +12,15 @@ import { User } from '../../../../common/models/user';
 export class CreateUpdateDateComponent implements OnInit, OnDestroy, AfterViewInit {
   public addDatesForm: FormGroup;
   dates: string[];
-  private dateList: DatesItem[];
   private destroy$ = new Subject<void>();
   user: User;
 
   constructor(private fb: FormBuilder,
               private createUpdateUser: CreateUpdateUserService,
-              private readonly userService: UserService,
-              private readonly dateService: DateService,
               private cd: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
-    this.loadDates();
     this.addDatesForm = this.fb.group({
       datesCount: this.fb.array([
         {
@@ -80,16 +73,6 @@ export class CreateUpdateDateComponent implements OnInit, OnDestroy, AfterViewIn
       }
 
     return this.addDatesForm.controls.datesCount.value[i].date ? 'border-green' : 'border-red';
-  }
-
-  loadDates(): void {
-    this.userService.getUser()
-      .takeUntil(this.destroy$)
-      .subscribe(user => {
-        this.user = user;
-        this.dateList = [];
-        this.dateList = this.dateService.setDateList(user, this.dateList);
-      });
   }
 
   ngAfterViewInit(): void {

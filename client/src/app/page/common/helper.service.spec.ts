@@ -3,6 +3,7 @@ import { getTestBed, TestBed } from '@angular/core/testing';
 import { HelperService } from './helper.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpClientModule } from '@angular/common/http';
+import { DatesItem } from './dates-item';
 
 describe('HelperService', () => {
   const dateList: DatesItem[] = [
