@@ -47,7 +47,7 @@ export class NavbarProfileComponent implements OnInit, OnDestroy {
       .takeUntil(this.destroy$)
       .subscribe(user => {
         this.user = user;
-        this.avatar = user.photoURL || '../../../../assets/img/userimg.jpg';
+        this.avatar = user.photoURL || 'assets/img/userimg.jpg';
         if (user.watched_issues) {
           this.loadUserTasks(user.watched_issues);
         }

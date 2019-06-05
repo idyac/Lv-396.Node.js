@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DropdownFilterComponent } from './dropdown-filter.component';
+import { appConfigProviders } from '../../common/config';
+import { FilterReturnService } from '../../common/filter-return.service';
 
 describe('DropdownFilterComponent', () => {
   let component: DropdownFilterComponent;
@@ -20,7 +22,10 @@ describe('DropdownFilterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DropdownFilterComponent ]
+      declarations: [ DropdownFilterComponent ],
+      providers: [ appConfigProviders,
+                   { provide: FilterReturnService, useValue: filterItem },
+]
     })
     .compileComponents();
   }));
