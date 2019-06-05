@@ -105,12 +105,6 @@ describe('UserBarInfoComponent', () => {
       .toEqual('Skype FileExchanger');
   });
 
-  it('should set avatar url', () => {
-    component.updateAvatar('avatar');
-    expect('avatar')
-      .toEqual(component.userinfo.photoURL);
-  });
-
   it('should return TeamLead name and surname', () => {
     expect(component.getTeamleadName())
       .toEqual('Skype FileExchanger');
