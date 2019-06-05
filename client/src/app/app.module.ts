@@ -45,7 +45,7 @@ import { ScrollingDirective } from './page/navbar/scrolling.directive';
     MenuItemComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    ScrollingDirective
+    ScrollingDirective,
   ],
 
   imports: [
