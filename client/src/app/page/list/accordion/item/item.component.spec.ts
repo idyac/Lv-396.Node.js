@@ -7,7 +7,7 @@ import { ItemComponent } from './item.component';
 import { ModalComponent } from '../../../modal/modal.component';
 import { AccordionComponent } from '../accordion.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
+import { appConfigProviders } from '../../../common/config';
 import { CommentModalComponent } from '../../../comment-modal/comment-modal.component';
 import { AddTaskFormComponent } from '../../../add-task-form/add-task-form.component';
 import { DropdownFilterComponent } from '../../../filter/dropdown-filter/dropdown-filter.component';
@@ -16,19 +16,28 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TasksService } from '../../../common/tasks.service';
 import { UserService } from '../../../../common/services/user.service';
+import { HttpClientModule } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Task } from '../../../common/task';
+import { User } from '../../../../common/models/user';
 
 describe('ItemComponent', () => {
   let component: ItemComponent;
   let fixture: ComponentFixture<ItemComponent>;
-
+  let tasksService: Partial<TasksService>;
+  let userService: Partial<UserService>;
   const tasksServiceMock = {
-    getUserTasks: () => {}
+    getUserTasks: () => { }
   };
 
-  const userServiceMock = {
-    getUser: () => {}
-  };
-
+  const userServiceMock = jasmine.createSpyObj('UserService', {
+    getAll: Observable.empty(),
+    getUserType: '',
+    getUserId: '',
+    getUser: Observable.empty(),
+    getAllHr: Observable.empty(),
+  });
+  userServiceMock.takeUser = Observable.empty();
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -39,6 +48,7 @@ describe('ItemComponent', () => {
         FormsModule,
         HttpClientTestingModule,
         RouterTestingModule,
+        HttpClientModule,
         ToastrModule.forRoot(),
         ],
       declarations: [
@@ -49,7 +59,8 @@ describe('ItemComponent', () => {
         DropdownFilterComponent,
         CommentModalComponent
         ],
-      providers: [ {provide: TasksService, useValue: tasksServiceMock},
+      providers: [ appConfigProviders,
+                   {provide: TasksService, useValue: tasksServiceMock},
                    {provide: UserService, useValue: userServiceMock},
                    RouterTestingModule,
                  ]
@@ -60,6 +71,9 @@ describe('ItemComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ItemComponent);
     component = fixture.componentInstance;
+    component.task = new Task();
+    tasksService = fixture.debugElement.injector.get(TasksService);
+    userService = TestBed.get(UserService);
     fixture.detectChanges();
   });
 

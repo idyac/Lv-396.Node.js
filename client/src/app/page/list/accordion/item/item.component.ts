@@ -35,7 +35,7 @@ export class ItemComponent implements OnInit {
     this.userService.takeUser
       .subscribe(user => {
         this.user = user;
-        this.changeClassUnread();
+        this.changeClassUnread(user);
     });
     this.userService.getAll()
       .subscribe(users => this.users = users);
@@ -49,7 +49,8 @@ export class ItemComponent implements OnInit {
 
   openTask(): void {
     this.isOpen = true;
-    this.changeClassUnread();
+    this.tasksService.openTaskById(this.task.id);
+    this.changeClassUnread(this.user);
     this.checkedAuthorOrPerformer();
     this.taskIsWatched();
   }
@@ -66,8 +67,8 @@ export class ItemComponent implements OnInit {
     this.unreadClass = this.isOpen ? 'unread-open' : 'unread';
   }
 
-  changeClassUnread(): void {
-    const condHrTasks = !this.user.watched_issues.includes(this.task.id) &&
+  changeClassUnread(user): void {
+    const condHrTasks = !user.watched_issues.includes(this.task.id) &&
                         this.userId !== this.task.author._id &&
                         !this.checkedAuthorOrPerformer();
 

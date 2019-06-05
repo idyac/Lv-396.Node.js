@@ -4,7 +4,7 @@ import { ModalComponent } from './modal.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DropdownFilterComponent } from '../filter/dropdown-filter/dropdown-filter.component';
 import { AddTaskFormComponent } from '../add-task-form/add-task-form.component';
-import { FILTERS } from '../common/config';
+import { appConfigProviders } from '../common/config';
 import { TasksService } from '../common/tasks.service';
 import { UserService } from '../../common/services/user.service';
 import { Observable } from 'rxjs';
@@ -37,10 +37,10 @@ describe('ModalComponent', () => {
         isCalendar: false,
         name: 'status',
         options: [
-                  {name: 'High', value: 0},
-                  {name: 'Normal', value: 1},
-                  {name: 'Low', value: 2}
-                 ]
+          { name: 'High', value: 0 },
+          { name: 'Normal', value: 1 },
+          { name: 'Low', value: 2 }
+        ]
       };
 
       return filters;
@@ -48,20 +48,20 @@ describe('ModalComponent', () => {
   };
 
   const tasksServiceMock = {
-    getUserTasks: () => {}
+    getUserTasks: () => { }
   };
 
   class userServiceMock {
-    getAllHr() {
+    getAllHr(): Observable<any> {
       return Observable.empty();
     }
-    getUser() {
+    getUser(): Observable<any> {
       return Observable.empty();
     }
   }
 
   const filterServiceMock = {
-    getFilters: () => {}
+    getFilters: () => { }
   };
 
   beforeEach(async(() => {
@@ -70,20 +70,21 @@ describe('ModalComponent', () => {
         ModalModule.forRoot(),
         ReactiveFormsModule,
         FormsModule,
-       ],
+      ],
       declarations: [
         ModalComponent,
         DropdownFilterComponent,
         AddTaskFormComponent
       ],
       providers: [
-                  {provide: FILTERS, useValue: filterReturnServiceMock},
-                  {provide: TasksService, useValue: tasksServiceMock},
-                  {provide: UserService, useClass: userServiceMock},
-                  {provide: FiltersService, useValue: filterServiceMock}
-                 ]
+        appConfigProviders,
+        { provide: FilterReturnService, useValue: filterReturnServiceMock },
+        { provide: TasksService, useValue: tasksServiceMock },
+        { provide: UserService, useClass: userServiceMock },
+        { provide: FiltersService, useValue: filterServiceMock }
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -94,11 +95,7 @@ describe('ModalComponent', () => {
   });
 
   it('should create', () => {
-    fakeAsync(
-      inject([FilterReturnService],
-      (filterMock: FilterReturnService) => {
     expect(component)
       .toBeTruthy();
-  }));
-});
+  });
 });
