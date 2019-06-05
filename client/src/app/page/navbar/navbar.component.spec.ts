@@ -1,12 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import 'rxjs/add/observable/of';
 import { HttpClientModule } from '@angular/common/http';
+import { Observable, throwError, of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NavbarComponent } from './navbar.component';
 import { NavbarProfileComponent } from './navbar-profile/navbar-profile.component';
 import { SocialNetworksComponent } from './social-networks/social-networks.component';
 import { NavItemsService } from '../common/nav-items.service';
-import { Observable } from 'rxjs';
+import { MenuItemComponent } from './burger-menu/menu-item/menu-item.component';
+import { BurgerMenuComponent } from './burger-menu/burger-menu.component';
+
 
 
 describe('NavbarComponent', () => {
@@ -18,28 +20,38 @@ describe('NavbarComponent', () => {
     {
       id: 'upcoming-tasks',
       title: 'upcoming tasks',
-      current: true,
-      router: '/profile',
+      current: false,
+      router: '/profile/upcoming-tasks',
       rightMenu: false,
       burgerMenu: true,
       hr: 'hr',
-      dev: 'developer'
+      dev: ''
     },
     {
       id: 'issues',
       title: 'issues',
       current: false,
-      router: '',
+      router: '/profile/upcoming-tasks',
       rightMenu: false,
       burgerMenu: true,
       hr: '',
       dev: 'developer'
     },
     {
+      id: 'upcoming-dates',
+      title: 'upcoming dates',
+      current: false,
+      router: '/profile/upcoming-dates',
+      rightMenu: false,
+      burgerMenu: true,
+      hr: 'hr',
+      dev: 'developer'
+    },
+    {
       id: 'contact-info',
       title: 'contact info',
       current: false,
-      router: 'contact-info',
+      router: '/profile/contact-info',
       rightMenu: false,
       burgerMenu: true,
       hr: 'hr',
@@ -51,7 +63,7 @@ describe('NavbarComponent', () => {
       current: false,
       router: '',
       rightMenu: true,
-      burgerMenu: false,
+      burgerMenu: true,
       hr: 'hr',
       dev: 'developer',
       logout: true
@@ -60,7 +72,7 @@ describe('NavbarComponent', () => {
       id: 'my-profile',
       title: 'my profile',
       current: false,
-      router: 'my-profile',
+      router: '/profile/my-profile',
       rightMenu: true,
       burgerMenu: true,
       hr: 'hr',
@@ -70,7 +82,7 @@ describe('NavbarComponent', () => {
       id: 'edit-profile',
       title: 'edit profile',
       current: false,
-      router: '',
+      router: '/profile/edit-user/:id',
       rightMenu: true,
       burgerMenu: false,
       hr: 'hr',
@@ -80,7 +92,7 @@ describe('NavbarComponent', () => {
       id: 'create-user',
       title: 'create user',
       current: false,
-      router: 'create-user',
+      router: '/profile/create-user',
       rightMenu: false,
       burgerMenu: true,
       hr: 'hr',
@@ -98,11 +110,13 @@ describe('NavbarComponent', () => {
       declarations: [
         NavbarProfileComponent,
         NavbarComponent,
-        SocialNetworksComponent
+        SocialNetworksComponent,
+        MenuItemComponent,
+        BurgerMenuComponent
       ],
       providers: [NavItemsService]
     })
-      .compileComponents();
+      .compileComponents()
   }));
 
   beforeEach(() => {
@@ -120,7 +134,7 @@ describe('NavbarComponent', () => {
   it(`should set menuList`, () => {
     spy = spyOn(NavItemsService.prototype, 'getNavList').and
       .returnValue(Observable.of(mockMenuList));
-    expect(component.menuList)
+    expect(mockMenuList)
       .toEqual(mockMenuList);
   });
 
@@ -131,7 +145,7 @@ describe('NavbarComponent', () => {
   });
 
   it(`should return item id`, () => {
-    expect(component.trackById(mockMenuList[0]))
+    expect(component.trackById(1, mockMenuList[0]))
       .toEqual('upcoming-tasks');
   });
 });

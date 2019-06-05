@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../../common/services/user.service';
 import { User } from '../../common/models/user';
 import { DatesItem } from '../common/dates-item';
@@ -7,18 +7,20 @@ import { Filter } from '../common/filter';
 import { FiltersService } from '../common/filters.service';
 import { FILTER_CSS_CLASS_PREFIX } from '../common/config';
 import { DateService } from '../common/date.service';
+import { Subject } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-upcoming-dates',
   templateUrl: './upcoming-dates.component.html',
   styleUrls: ['./upcoming-dates.component.scss']
 })
-export class UpcomingDatesComponent implements OnInit {
+export class UpcomingDatesComponent implements OnInit, OnDestroy {
   user: User;
   filter: Filter[];
   dateList: DatesItem[];
   modalTypeVal: string;
   filterGrids: string;
+  private destroy$ = new Subject<void>();
 
   constructor(
     private readonly userService: UserService,
@@ -34,29 +36,29 @@ export class UpcomingDatesComponent implements OnInit {
   }
 
   loadUser(): void {
-    this.userService.getUser(this.userService.getUserId())
+    this.userService.getUser()
+      .takeUntil(this.destroy$)
       .subscribe(user => {
         this.user = user;
-      });
-    if (this.userService.getUserType() === 'hr') {
-      this.userService.getUsersOfHr()
-        .subscribe(users => {
-          this.dateList = [];
-          users.forEach((user) => {
+        if (this.userService.getUserType() === 'hr') {
+          this.userService.getUsersOfHr()
+            .takeUntil(this.destroy$)
+            .subscribe(users => {
+              this.dateList = [];
+              users.forEach((item) => {
+                this.dateList = this.dateService.setDateList(item, this.dateList);
+              });
+            });
+        } else if (this.userService.getUserType() === 'developer') {
+            this.dateList = [];
             this.dateList = this.dateService.setDateList(user, this.dateList);
-          });
-        });
-    } else if (this.userService.getUserType() === 'developer') {
-      this.userService.takeUser
-        .subscribe(user => {
-          this.dateList = [];
-          this.dateList = this.dateService.setDateList(user, this.dateList);
-        });
-    }
+        }
+      });
   }
 
   getFilters(): void {
     this.filtersService.getFilters()
+      .takeUntil(this.destroy$)
       .subscribe(
         filters => this.filter = filters.filter((item: Filter) => item.name === 'date'),
         () => {},
@@ -96,4 +98,9 @@ export class UpcomingDatesComponent implements OnInit {
     return options.map(opt =>
       opt.name === 'date' ? { name: opt.name, value: dateValue } : opt);
   };
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

@@ -1,8 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
-import 'rxjs/add/observable/of';
 import { SocialNetworksComponent } from './social-networks.component';
-import { SocialNetworkService } from '../../common/social-network.service';
 
 describe('SocialNetworksComponent', () => {
   let component: SocialNetworksComponent;
@@ -35,11 +33,11 @@ describe('SocialNetworksComponent', () => {
       .compileComponents();
   }));
 
-  beforeEach(() => {
+  beforeEach(async(() => {
     fixture = TestBed.createComponent(SocialNetworksComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component)

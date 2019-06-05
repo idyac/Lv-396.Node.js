@@ -10,10 +10,10 @@ describe('UserFilterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserFilterComponent ],
-      imports: [ FormsModule, RouterTestingModule ]
+      declarations: [UserFilterComponent],
+      imports: [FormsModule, RouterTestingModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -23,6 +23,7 @@ describe('UserFilterComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component)
+      .toBeTruthy();
   });
 });
