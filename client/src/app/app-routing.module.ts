@@ -1,4 +1,7 @@
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
 import { Routes, RouterModule } from '@angular/router';
 import { PageModule } from './page/page.module';
 import { routes as childRoutes } from './page/page-routing.module';
@@ -33,7 +36,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), PageModule],
+  imports: [RouterModule.forRoot(routes), PageModule, FormsModule, ReactiveFormsModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
