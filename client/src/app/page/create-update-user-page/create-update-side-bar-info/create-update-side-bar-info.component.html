@@ -2,7 +2,7 @@
   <div class="column w-100">
     <div class="upload-image">
       <app-user-image [imageURL]="user.photoURL" class="photo"></app-user-image>
-      <app-update-avatar (onUpload)="updateAvatar($event)"></app-update-avatar>
+      <app-update-avatar [id]="user._id" (onUpload)="updateAvatar($event)"></app-update-avatar>
     </div>
     <div class="info-form">
       <div class="input-label">

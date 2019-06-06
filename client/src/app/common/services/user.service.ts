@@ -102,10 +102,9 @@ export class UserService {
     return httpOptions.headers.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
   }
 
-  postImage(avatar: File): Observable<object> {
-    const id = this.getUserId();
+  postImage(avatar: File, id?: string): Observable<object> {
     const fd = new FormData();
-    fd.append('id', id);
+    id ? fd.append('id', id) : fd.append('id', this.getUserId());
     fd.append('avatar', avatar);
 
     return this.http.post(`${api}users/change_avatar`, fd);
